@@ -3,7 +3,7 @@
 零建置（no build step）靜態站。丟 `.md`、push、自動上線。
 
 - **本機資料夾**：`D:\htht`
-- **GitHub**：`https://github.com/anixwindy/htht`
+- **GitHub**：`https://github.com/anixwindy/web_htht`
 - **部署**：Cloudflare Pages，push 到 `main` 就自動上線
 
 ## 目錄結構
