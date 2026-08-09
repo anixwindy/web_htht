@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>工作回報 · C# + Godot 3D</title>
+  <meta name="description" content="C# + Godot 4 做程序生成的 3D 開放世界。做4休2，世界用程式碼長出來，改一行按 F5 就看得到。">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="index.html"><span class="prompt">$</span> world_log<span class="blink">_</span></a>
+    <div class="tagline">C# + Godot 4 — 用程式碼長出一個 3D 世界。做4休2，改一行、按 F5、看畫面。</div>
+    <nav class="site">
+      <a href="#now">現在的方向</a>
+      <a href="#weekly">工作回報</a>
+      <a href="#writeups">已完成專案</a>
+      <a href="https://github.com/anixwindy" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section id="now">
+    <h2 class="section">現在的方向</h2>
+    <ul class="posts">
+
+      <li>
+        <details>
+          <summary>
+            <span class="now-title">① 在做什麼</span>
+            <span class="now-lead">C# + Godot 4，程序生成的 3D 開放世界</span>
+          </summary>
+          <div class="now-body">
+            <div class="post-meta">
+              <span class="date">2026-08-09 定案</span>
+              <span class="tag">C#</span>
+              <span class="tag">Godot 4.7</span>
+              <span class="tag">程序生成</span>
+            </div>
+            <ul>
+              <li>世界由程式碼生出來，不用滑鼠擺 —— 場景檔裡只有一個空節點，地形／光照全在 <code>_Ready()</code> 長出來</li>
+              <li>日常只開 Visual Studio：寫 <code>World.cs</code> → F5 → 看畫面。Godot 只是被叫起來的執行檔</li>
+              <li>目前進度：<code>FastNoiseLite</code> fBm 生成 32×32 地形、自由飛行相機、方向鍵即時轉太陽</li>
+            </ul>
+          </div>
+        </details>
+      </li>
+
+      <li>
+        <details>
+          <summary>
+            <span class="now-title">② 為什麼是這條</span>
+            <span class="now-lead">畫面就是裁判，演算法當建材不當題目</span>
+          </summary>
+          <div class="now-body">
+            <ul>
+              <li><strong>3D 的視覺品質來自光照／材質／後處理，那是程式，不是手繪。</strong>對不會畫畫的人，3D 比 2D 友善</li>
+              <li>程序生成是純演算法（噪聲、fBm、生態規則、尋路），但產出的是世界不是分數 —— 演算法當建材，不當題目</li>
+              <li>數學自學「沒有裁判」的問題在這裡自動消失：<strong>畫面就是裁判</strong>，跑不跑得動、好不好看，眼睛直接判</li>
+            </ul>
+          </div>
+        </details>
+      </li>
+
+      <li>
+        <details>
+          <summary>
+            <span class="now-title">③ 下一步</span>
+            <span class="now-lead">地圖開到 96×96 量 FPS，然後把飛改成走</span>
+          </summary>
+          <div class="now-body">
+            <ul>
+              <li>地圖從 32×32 開到 96×96，量 FPS。<strong>預期會卡 —— 先感受一次「變慢」，之後學最佳化才有意義</strong></li>
+              <li>卡了就把 1024 個獨立 <code>MeshInstance3D</code> 換成 <code>MultiMeshInstance3D</code>，改前／改後 FPS 記進差分帳本</li>
+              <li>把「飛」換成「走」：加 <code>CharacterBody3D</code> + 碰撞，變成真的站在地形上的第一人稱</li>
+            </ul>
+          </div>
+        </details>
+      </li>
+
+    </ul>
+  </section>
+
+  <section id="weekly">
+    <h2 class="section">工作回報</h2>
+    <ul class="posts" id="weekly-list">
+      <li class="status">載入中…</li>
+    </ul>
+  </section>
+
+  <section id="writeups">
+    <h2 class="section">已完成專案</h2>
+    <ul class="posts" id="writeup-list">
+      <li class="status">載入中…</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">built with plain HTML · deployed on Cloudflare Pages · no build step 🟢</div>
+</footer>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

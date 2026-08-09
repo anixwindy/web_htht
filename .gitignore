@@ -1,0 +1,14 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# editor
+.vscode/
+.idea/
+
+# python
+__pycache__/
+*.pyc
+
+# 本機預覽伺服器暫存 / 雜物
+*.log
