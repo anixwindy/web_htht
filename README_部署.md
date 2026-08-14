@@ -2,9 +2,11 @@
 
 零建置（no build step）靜態站。丟 `.md`、push、自動上線。
 
+- **線上網址**：`https://segv0x41.com`
 - **本機資料夾**：`D:\htht`
 - **GitHub**：`https://github.com/anixwindy/web_htht`
-- **部署**：Cloudflare Pages，push 到 `main` 就自動上線
+- **部署**：Cloudflare Workers，push 到 `main` 就自動上線
+- **Cloudflare 專案**：Worker 名 `web-htht`（帳號 `snowaex3`）
 
 ## 目錄結構
 
@@ -18,17 +20,22 @@ htht/
 ├── gen_posts.py        掃 posts/ 自動生 posts.json（路徑可攜）
 ├── gen_posts.bat       雙擊執行上面那支
 ├── new_post.ps1 / .bat 建新文章的小工具
+├── push.bat        ★   一鍵發布（重生 posts.json → 列檔案 → commit → push）
 └── posts/              ★ 文章都放這（.md）
     └── _模板.md        ★ 三格模板，複製這份
 ```
 
-## 每次寫一篇（三步）
+## 每次寫一篇（兩次雙擊）
 
 1. **雙擊 `new_post.bat`** — 自動用今天日期建檔、自動填好 H1 的日期與編號、自動開編輯器
 2. 填三格，存檔（UTF-8）
-3. **雙擊 `gen_posts.bat`**，然後 `git add . && git commit -m "log: YYYY-MM-DD" && git push`
+3. **雙擊 `push.bat`** — 它會自動重生 `posts.json`、**列出將要公開的檔案**、問你一句 commit 訊息（直接 Enter 就用日期自動填），然後 push
 
-手動版（不想用腳本時）：複製 `posts/_模板.md` → 改名成 `posts/YYYY-MM-DD_工作回報.md` → 改第一行標題 → 同上第 3 步。
+`push.bat` 列出檔案那一步是唯一擋在「私人筆記誤放進 `posts/`」和「它出現在公開網站上」之間的東西——**打訊息之前掃一眼那份清單**。任何一步失敗它都會停住並顯示原因，不會偷偷推上去。
+
+推完等約 30 秒，Cloudflare 建置完成，開網站 `Ctrl` + `F5` 看結果。
+
+手動版（不想用腳本時）：複製 `posts/_模板.md` → 改名成 `posts/YYYY-MM-DD_工作回報.md` → 改第一行標題 → 雙擊 `gen_posts.bat` → `git add . && git commit -m "log: YYYY-MM-DD" && git push`。
 
 ## 模板就三格
 

@@ -52,7 +52,6 @@ else {
 
 Write-Host ''
 Write-Host '----------------------------------------------------------'
-Write-Host ' 寫完、存檔（UTF-8）之後，回來做這兩步：'
-Write-Host '   1. 雙擊 gen_posts.bat'
-Write-Host "   2. git add . ; git commit -m `"工作回報 #$n`" ; git push"
+Write-Host ' 寫完、存檔（UTF-8）之後，回來雙擊 push.bat 就會上線。'
+Write-Host ' （push.bat 會自己重生 posts.json，不用再跑 gen_posts.bat）'
 Write-Host '----------------------------------------------------------'
