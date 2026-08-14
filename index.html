@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>工作回報 · C# + Godot 3D</title>
-  <meta name="description" content="C# + Godot 4 做程序生成的 3D 開放世界。做4休2，世界用程式碼長出來，改一行按 F5 就看得到。">
+  <title>工作回報 · C++ 離線渲染</title>
+  <meta name="description" content="C++ 手寫路徑追蹤渲染器，自己算出光。做4休2，改一個數字、Ctrl+F5、看圖。">
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -12,7 +12,7 @@
 <header class="site">
   <div class="wrap">
     <a class="brand" href="index.html"><span class="prompt">$</span> world_log<span class="blink">_</span></a>
-    <div class="tagline">C# + Godot 4 — 用程式碼長出一個 3D 世界。做4休2，改一行、按 F5、看畫面。</div>
+    <div class="tagline">C++ 手寫路徑追蹤 — 自己算出光。做4休2，改一個數字、Ctrl+F5、看圖。</div>
     <nav class="site">
       <a href="#now">現在的方向</a>
       <a href="#weekly">工作回報</a>
@@ -32,19 +32,20 @@
         <details>
           <summary>
             <span class="now-title">① 在做什麼</span>
-            <span class="now-lead">C# + Godot 4，程序生成的 3D 開放世界</span>
+            <span class="now-lead">C++ 手寫離線渲染器（路徑追蹤）</span>
           </summary>
           <div class="now-body">
             <div class="post-meta">
-              <span class="date">2026-08-09 定案</span>
-              <span class="tag">C#</span>
-              <span class="tag">Godot 4.7</span>
-              <span class="tag">程序生成</span>
+              <span class="date">2026-08-14 定案</span>
+              <span class="tag">C++</span>
+              <span class="tag">路徑追蹤</span>
+              <span class="tag">離線渲染</span>
             </div>
             <ul>
-              <li>世界由程式碼生出來，不用滑鼠擺 —— 場景檔裡只有一個空節點，地形／光照全在 <code>_Ready()</code> 長出來</li>
-              <li>日常只開 Visual Studio：寫 <code>World.cs</code> → F5 → 看畫面。Godot 只是被叫起來的執行檔</li>
-              <li>目前進度：<code>FastNoiseLite</code> fBm 生成 32×32 地形、自由飛行相機、方向鍵即時轉太陽</li>
+              <li>一切都是自己寫的 —— 從 <code>main()</code> 開始，最外層迴圈是自己的 <code>for y / for x</code>。沒有引擎、沒有框架、沒有「等別人來呼叫我」</li>
+              <li>零依賴 —— 一個 <code>.cpp</code> 加一個單檔頭圖片輸出庫。不裝 CMake、不裝 vcpkg，一次只加一樣東西</li>
+              <li>日常只開 Visual Studio：寫 <code>Renderer.cpp</code> → <code>Ctrl+F5</code> → 看 <code>out.png</code></li>
+              <li>目前進度：環境架設中，第一張圖還沒出來</li>
             </ul>
           </div>
         </details>
@@ -54,13 +55,14 @@
         <details>
           <summary>
             <span class="now-title">② 為什麼是這條</span>
-            <span class="now-lead">畫面就是裁判，演算法當建材不當題目</span>
+            <span class="now-lead">圖就是裁判，而且 bug 有形狀</span>
           </summary>
           <div class="now-body">
             <ul>
-              <li><strong>3D 的視覺品質來自光照／材質／後處理，那是程式，不是手繪。</strong>對不會畫畫的人，3D 比 2D 友善</li>
-              <li>程序生成是純演算法（噪聲、fBm、生態規則、尋路），但產出的是世界不是分數 —— 演算法當建材，不當題目</li>
-              <li>數學自學「沒有裁判」的問題在這裡自動消失：<strong>畫面就是裁判</strong>，跑不跑得動、好不好看，眼睛直接判</li>
+              <li><strong>語言優先。</strong>C++ 是所有語言裡最喜歡的一個。排斥 C# 的真正原因是儀式性語法，還有「主迴圈不屬於自己」—— <code>_Ready()</code> 是引擎呼叫你，不是你在跑</li>
+              <li><strong>bug 有形狀。</strong>太暗＝少了 gamma；表面黑點＝射線自交；孤立亮點＝高變異數路徑；顏色整個翻掉＝RGB/BGR 寫反。<strong>錯誤可以用眼睛演繹，不必亂試</strong></li>
+              <li><strong>不做遊戲。</strong>離線渲染的主場是電影特效、動畫、工業與科學視覺化。它追求物理正確，一幀算幾小時也可以 —— 跟遊戲的 16 毫秒妥協文化是相反的價值觀</li>
+              <li><strong>又深又難，人又少。</strong>渲染方程式（Kajiya 1986）一行寫得完，整個領域四十年都在解它</li>
             </ul>
           </div>
         </details>
@@ -70,13 +72,13 @@
         <details>
           <summary>
             <span class="now-title">③ 下一步</span>
-            <span class="now-lead">地圖開到 96×96 量 FPS，然後把飛改成走</span>
+            <span class="now-lead">先讓第一張圖出來，再一路走到會反彈的光</span>
           </summary>
           <div class="now-body">
             <ul>
-              <li>地圖從 32×32 開到 96×96，量 FPS。<strong>預期會卡 —— 先感受一次「變慢」，之後學最佳化才有意義</strong></li>
-              <li>卡了就把 1024 個獨立 <code>MeshInstance3D</code> 換成 <code>MultiMeshInstance3D</code>，改前／改後 FPS 記進差分帳本</li>
-              <li>把「飛」換成「走」：加 <code>CharacterBody3D</code> + 碰撞，變成真的站在地形上的第一人稱</li>
+              <li>裝 VS 的 C++ 工作負載，跑出第一張 256×256 漸層 PNG。<strong>這一階不學渲染，只是確認「程式跑完 → 資料夾出現一張圖」這條路是通的</strong></li>
+              <li>射線與相機 → 球的求交 → 法線著色。驗收是「畫面中央出現一顆有立體感的彩色球」</li>
+              <li>真正的分水嶺在漫反射：<strong>第一次出現「沒有公式可以直接算，只能取樣很多次求平均」</strong>。柔和陰影跟地面滲上來的顏色，沒有任何一行程式碼在算它們 —— 它們自己長出來</li>
             </ul>
           </div>
         </details>
