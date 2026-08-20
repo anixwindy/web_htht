@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>工作回報 · C++ 離線渲染</title>
-  <meta name="description" content="C++ 手寫路徑追蹤渲染器，自己算出光。做4休2，改一個數字、Ctrl+F5、看圖。">
+  <title>工作回報 · 競技程式設計</title>
+  <meta name="description" content="C++ 解 Codeforces / AtCoder。有界、有深度、每一題都有裁判。做4休2，一題一個檔，sample 綠了才算完。">
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -12,7 +12,7 @@
 <header class="site">
   <div class="wrap">
     <a class="brand" href="index.html"><span class="prompt">$</span> world_log<span class="blink">_</span></a>
-    <div class="tagline">C++ 手寫路徑追蹤 — 自己算出光。做4休2，改一個數字、Ctrl+F5、看圖。</div>
+    <div class="tagline">C++ 解 Codeforces / AtCoder — 有界、有深度、每一題都有裁判。做4休2。</div>
     <nav class="site">
       <a href="#now">現在的方向</a>
       <a href="#weekly">工作回報</a>
@@ -32,20 +32,21 @@
         <details>
           <summary>
             <span class="now-title">① 在做什麼</span>
-            <span class="now-lead">C++ 手寫離線渲染器（路徑追蹤）</span>
+            <span class="now-lead">競技程式設計（Codeforces / AtCoder），用 C++</span>
           </summary>
           <div class="now-body">
             <div class="post-meta">
-              <span class="date">2026-08-14 定案</span>
-              <span class="tag">C++</span>
-              <span class="tag">路徑追蹤</span>
-              <span class="tag">離線渲染</span>
+              <span class="date">2026-08-20 定案</span>
+              <span class="tag">C++20</span>
+              <span class="tag">Codeforces</span>
+              <span class="tag">AtCoder</span>
+              <span class="tag">演算法</span>
             </div>
             <ul>
-              <li>一切都是自己寫的 —— 從 <code>main()</code> 開始，最外層迴圈是自己的 <code>for y / for x</code>。沒有引擎、沒有框架、沒有「等別人來呼叫我」</li>
-              <li>零依賴 —— 一個 <code>.cpp</code> 加一個單檔頭圖片輸出庫。不裝 CMake、不裝 vcpkg，一次只加一樣東西</li>
-              <li>日常只開 Visual Studio：寫 <code>Renderer.cpp</code> → <code>Ctrl+F5</code> → 看 <code>out.png</code></li>
-              <li>目前進度：環境架設中，第一張圖還沒出來</li>
+              <li><strong>有界。</strong>一題就是一題 —— 有輸入、有輸出、有標準答案。不像開放式專案那樣沒有邊，做到哪算哪</li>
+              <li><strong>一題一個檔。</strong><code>001.cpp</code>、<code>002.cpp</code>… 丟進資料夾就自動變成一個獨立執行檔，不用管建置設定</li>
+              <li><strong>零安裝。</strong>CLion ＋ MSYS2 的 <code>g++ 15.2</code>，全部是現成的。<code>CMakeLists.txt</code> 上面六個旋鈕，其餘不用碰</li>
+              <li>目前進度：環境驗證完成，正在補「對拍」這一層。第一題還沒送出</li>
             </ul>
           </div>
         </details>
@@ -55,14 +56,14 @@
         <details>
           <summary>
             <span class="now-title">② 為什麼是這條</span>
-            <span class="now-lead">圖就是裁判，而且 bug 有形狀</span>
+            <span class="now-lead">要的不是贏，是一條把所有變化都包進去的鏈</span>
           </summary>
           <div class="now-body">
             <ul>
-              <li><strong>語言優先。</strong>C++ 是所有語言裡最喜歡的一個。排斥 C# 的真正原因是儀式性語法，還有「主迴圈不屬於自己」—— <code>_Ready()</code> 是引擎呼叫你，不是你在跑</li>
-              <li><strong>bug 有形狀。</strong>太暗＝少了 gamma；表面黑點＝射線自交；孤立亮點＝高變異數路徑；顏色整個翻掉＝RGB/BGR 寫反。<strong>錯誤可以用眼睛演繹，不必亂試</strong></li>
-              <li><strong>不做遊戲。</strong>離線渲染的主場是電影特效、動畫、工業與科學視覺化。它追求物理正確，一幀算幾小時也可以 —— 跟遊戲的 16 毫秒妥協文化是相反的價值觀</li>
-              <li><strong>又深又難，人又少。</strong>渲染方程式（Kajiya 1986）一行寫得完，整個領域四十年都在解它</li>
+              <li><strong>「鏈」。</strong>從初始狀態出發、把對手每一種回應都吸收進去、最終收束到我要的終局的那條路徑。爐石的 OTK combo、西洋棋的開局準備、1A2B 的每一次猜測 —— 都是同一個結構。在賽局論裡它有精確的名字：<strong>必勝策略</strong></li>
+              <li><strong>所以偏食是可預測的。</strong>DP（<code>f[i]</code> 由 <code>f[i-1]</code> 決定）、構造題、賽局論 —— 這三類本身就是鏈，適配度極高。線段樹那種「維護一坨東西」的題大概會覺得無聊，這一點先寫下來，之後再看準不準</li>
+              <li><strong>驗收零歧義。</strong>綠燈或紅燈，沒有「還行吧」。這正是上一條路（離線渲染）缺的東西 —— 圖好不好看是主觀的，AC 不是</li>
+              <li><strong>語言沒變。</strong>三次改方向，C++ 是唯一沒動過的那一項。這次也一樣</li>
             </ul>
           </div>
         </details>
@@ -72,13 +73,14 @@
         <details>
           <summary>
             <span class="now-title">③ 下一步</span>
-            <span class="now-lead">先讓第一張圖出來，再一路走到會反彈的光</span>
+            <span class="now-lead">先把「抓錯」的三層補齊，再從 DP 和賽局論開吃</span>
           </summary>
           <div class="now-body">
             <ul>
-              <li>裝 VS 的 C++ 工作負載，跑出第一張 256×256 漸層 PNG。<strong>這一階不學渲染，只是確認「程式跑完 → 資料夾出現一張圖」這條路是通的</strong></li>
-              <li>射線與相機 → 球的求交 → 法線著色。驗收是「畫面中央出現一顆有立體感的彩色球」</li>
-              <li>真正的分水嶺在漫反射：<strong>第一次出現「沒有公式可以直接算，只能取樣很多次求平均」</strong>。柔和陰影跟地面滲上來的顏色，沒有任何一行程式碼在算它們 —— 它們自己長出來</li>
+              <li><strong>L1 已備妥：</strong><code>-D_GLIBCXX_DEBUG</code> 讓 <code>vector</code> 越界直接報行號；<code>-ftrapv</code> 讓 <code>int</code> 溢位直接中止，不再印出一個看似正確的錯答案。<strong>這台機器沒有 sanitizer（MinGW 不附 <code>libasan</code>），所以用這兩個補</strong></li>
+              <li><strong>L2 還沒做，這是下一件事：</strong>對拍 —— 寫一個一定對但很慢的暴力版，跟正解比對隨機測資。<strong>L1 抓的是「寫錯了」，L2 抓的是「想錯了」，而後者才是 WA 的大宗</strong></li>
+              <li><strong>然後開吃：</strong>先 DP、再賽局論（Nim、SG 函數）。賽局論的整個內容就是「證明我的鏈涵蓋對手所有變化」—— 那根本是照著偏好寫的</li>
+              <li><strong>帶一個儀表板上路：</strong><code>N10</code> = 每 10 題學到幾個新名字。題庫不會空，但驚訝會空 —— 這個數字掉到 0.5 以下時就該轉型，而不是硬撐到膩</li>
             </ul>
           </div>
         </details>
