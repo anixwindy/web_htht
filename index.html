@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>工作回報 · 競技程式設計</title>
-  <meta name="description" content="C++ 解 Codeforces / AtCoder。有界、有深度、每一題都有裁判。做4休2，一題一個檔，sample 綠了才算完。">
+  <title>工作回報 · 湧現模擬</title>
+  <meta name="description" content="用 C# + Godot 寫模擬：不擺內容，只寫規則，讓一堆自主單位在規則下自己活，長出算不到的東西。做4休2。">
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -12,7 +12,7 @@
 <header class="site">
   <div class="wrap">
     <a class="brand" href="index.html"><span class="prompt">$</span> world_log<span class="blink">_</span></a>
-    <div class="tagline">C++ 解 Codeforces / AtCoder — 有界、有深度、每一題都有裁判。做4休2。</div>
+    <div class="tagline">C# + Godot 寫模擬 — 我不擺內容，我寫規則；單位自己活，長出我算不到的東西。做4休2。</div>
     <nav class="site">
       <a href="#now">現在的方向</a>
       <a href="#weekly">工作回報</a>
@@ -32,21 +32,22 @@
         <details>
           <summary>
             <span class="now-title">① 在做什麼</span>
-            <span class="now-lead">競技程式設計（Codeforces / AtCoder），用 C++</span>
+            <span class="now-lead">湧現模擬（Emergent Simulation），用 C# + Godot</span>
           </summary>
           <div class="now-body">
             <div class="post-meta">
-              <span class="date">2026-08-20 定案</span>
-              <span class="tag">C++20</span>
-              <span class="tag">Codeforces</span>
-              <span class="tag">AtCoder</span>
-              <span class="tag">演算法</span>
+              <span class="date">2026-08-22 定案</span>
+              <span class="tag">C#</span>
+              <span class="tag">Godot 4.7.2</span>
+              <span class="tag">模擬</span>
+              <span class="tag">湧現</span>
             </div>
             <ul>
-              <li><strong>有界。</strong>一題就是一題 —— 有輸入、有輸出、有標準答案。不像開放式專案那樣沒有邊，做到哪算哪</li>
-              <li><strong>一題一個檔。</strong><code>001.cpp</code>、<code>002.cpp</code>… 丟進資料夾就自動變成一個獨立執行檔，不用管建置設定</li>
-              <li><strong>零安裝。</strong>CLion ＋ MSYS2 的 <code>g++ 15.2</code>，全部是現成的。<code>CMakeLists.txt</code> 上面六個旋鈕，其餘不用碰</li>
-              <li>目前進度：環境驗證完成，正在補「對拍」這一層。第一題還沒送出</li>
+              <li><strong>一句話：我不擺內容，我寫規則</strong> —— 一堆自主單位在規則下自己活，長出我算不到的東西</li>
+              <li><strong>第一個系統：蟻群覓食。</strong>300 隻蟲，三條<em>在地</em>規則（每隻蟲只看得到自己周圍 34 px），我唯一能做的事是放食物，<strong>不能命令任何一隻蟲</strong></li>
+              <li><strong>結果是蟲道。</strong>沒有任何一行程式碼寫著「形成蟲道」。更意外的是<strong>改道</strong> —— 近的那堆吃完後，蟲群自己把主要路線搬到遠的那堆去，那個決策是費洛蒙衰減造成的，沒有程式碼指揮</li>
+              <li><strong>量化過了：</strong>三條規則全開，35 秒運回 569 顆（32.2 顆/秒）；關掉「跟費洛蒙走」那一條剩 204 顆（7.4 顆/秒）。<strong>2.8 倍的效率差來自六行程式碼</strong>，而那六行裡沒有一個字提到「合作」或「最佳化」</li>
+              <li><strong>零安裝。</strong>Visual Studio 2026 ＋ .NET 10 ＋ Godot 4.7.2 mono，全部現成。Godot 自帶 NuGet 套件，離線也能建置</li>
             </ul>
           </div>
         </details>
@@ -56,14 +57,14 @@
         <details>
           <summary>
             <span class="now-title">② 為什麼是這條</span>
-            <span class="now-lead">要的不是贏，是一條把所有變化都包進去的鏈</span>
+            <span class="now-lead">間接性 —— 我不直接製造結果，我操縱條件，讓結果自己出現</span>
           </summary>
           <div class="now-body">
             <ul>
-              <li><strong>「鏈」。</strong>從初始狀態出發、把對手每一種回應都吸收進去、最終收束到我要的終局的那條路徑。爐石的 OTK combo、西洋棋的開局準備、1A2B 的每一次猜測 —— 都是同一個結構。在賽局論裡它有精確的名字：<strong>必勝策略</strong></li>
-              <li><strong>所以偏食是可預測的。</strong>DP（<code>f[i]</code> 由 <code>f[i-1]</code> 決定）、構造題、賽局論 —— 這三類本身就是鏈，適配度極高。線段樹那種「維護一坨東西」的題大概會覺得無聊，這一點先寫下來，之後再看準不準</li>
-              <li><strong>驗收零歧義。</strong>綠燈或紅燈，沒有「還行吧」。這正是上一條路（離線渲染）缺的東西 —— 圖好不好看是主觀的，AC 不是</li>
-              <li><strong>語言沒變。</strong>三次改方向，C++ 是唯一沒動過的那一項。這次也一樣</li>
+              <li><strong>決定性的一筆資料來自星海爭霸。</strong>我知道快攻和中期換家能上黃金白金，我選擇不拿，用蟲族 macro 待在青銅 N 年 —— 因為 macro 是間接的：顧經濟、注卵，<strong>軍隊自己長出來</strong>。這是所有資料裡唯一一筆「知道有更好的選項、算得出價差、然後選擇不拿」</li>
+              <li><strong>它跟另外四個 7–11 年的嗜好是同一句話</strong>（爐石牧師 74%、MOBA 只玩一隻控制英雄、羽球只單打、單車只跑山）。差別在於：前四個只證明我<em>喜歡</em>間接型，星海證明我<strong>寧可輸兩三個段位也要待在間接位</strong></li>
+              <li><strong>它同時解釋了四次失敗。</strong>粒子系統（設重力／阻力，世界自己跑）✅ 贏；raytrace（一條光線 → 一個顏色，一對一）❌ 六天；排序視覺化 ❌；競技程式設計（想出解法 → AC，一對一）❌ 兩天。<strong>共同點：後三個都沒有任何東西在自己活</strong></li>
+              <li><strong>所以得到一條可以拿來擋掉未來提案的規則：</strong>只要「輸出 = 我輸入的直接函數」，這條線就會死。排任何東西之前先問一句 —— <strong>有沒有東西在自己活？</strong></li>
             </ul>
           </div>
         </details>
@@ -73,14 +74,15 @@
         <details>
           <summary>
             <span class="now-title">③ 下一步</span>
-            <span class="now-lead">先把「抓錯」的三層補齊，再從 DP 和賽局論開吃</span>
+            <span class="now-lead">先轉那個旋鈕，再讓世界學會反抗我</span>
           </summary>
           <div class="now-body">
             <ul>
-              <li><strong>L1 已備妥：</strong><code>-D_GLIBCXX_DEBUG</code> 讓 <code>vector</code> 越界直接報行號；<code>-ftrapv</code> 讓 <code>int</code> 溢位直接中止，不再印出一個看似正確的錯答案。<strong>這台機器沒有 sanitizer（MinGW 不附 <code>libasan</code>），所以用這兩個補</strong></li>
-              <li><strong>L2 還沒做，這是下一件事：</strong>對拍 —— 寫一個一定對但很慢的暴力版，跟正解比對隨機測資。<strong>L1 抓的是「寫錯了」，L2 抓的是「想錯了」，而後者才是 WA 的大宗</strong></li>
-              <li><strong>然後開吃：</strong>先 DP、再賽局論（Nim、SG 函數）。賽局論的整個內容就是「證明我的鏈涵蓋對手所有變化」—— 那根本是照著偏好寫的</li>
-              <li><strong>帶一個儀表板上路：</strong><code>N10</code> = 每 10 題學到幾個新名字。題庫不會空，但驚訝會空 —— 這個數字掉到 0.5 以下時就該轉型，而不是硬撐到膩</li>
+              <li><strong>轉 <code>Decay</code>（費洛蒙衰減率）。</strong>太小 → 蟲道永遠不消失，食物早就吃完了蟲還在跑舊路；太大 → 蟲道還沒成形就沒了。<strong>它就是「探索 vs 利用」的旋鈕</strong>，那個甜點要用眼睛找</li>
+              <li><strong>然後加天敵。</strong>五隻蜘蛛、兩條規則。預期會看到蜘蛛<em>自己</em>沿著蟲道巡邏 —— 不是因為有人寫「沿蟲道巡邏」，而是因為蟲道上蟲最多</li>
+              <li><strong>而那是一場提前小考。</strong>這條路真正的生死關在第三年：<strong>怎麼造一個我控制不住的世界</strong>。我在星海當上帝爽，是因為對手不受我控制；自己寫的模擬沒有對手，跑三次就看穿了 —— 這就是 Factorio 要有蟲族、RimWorld 要有 story teller、Dwarf Fortress 座右銘是 "Losing is Fun" 的原因</li>
+              <li><strong>帶一個儀表板上路：</strong><code>E10</code> = 每做完 10 個系統，有幾個「跑出我沒預期的東西」。<strong>連續三個「無」就是紅色警報</strong>，代表我已經能預測自己的系統了</li>
+              <li><strong>誠實的但書：</strong>五次定案平均壽命 6.5 天，而且每一次都伴隨一份規劃文件。所以真正的證據不是文件寫了幾份，是筆記裡「意外」那一欄有沒有累積</li>
             </ul>
           </div>
         </details>
