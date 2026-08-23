@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>工作回報 · 湧現模擬</title>
-  <meta name="description" content="用 C# + Godot 寫模擬：不擺內容，只寫規則，讓一堆自主單位在規則下自己活，長出算不到的東西。做4休2。">
+  <meta name="description" content="用 C# + Unity 寫模擬：不擺內容，只寫規則，讓一堆自主單位在規則下自己活，長出算不到的東西。做4休2。">
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -12,7 +12,7 @@
 <header class="site">
   <div class="wrap">
     <a class="brand" href="index.html"><span class="prompt">$</span> world_log<span class="blink">_</span></a>
-    <div class="tagline">C# + Godot 寫模擬 — 我不擺內容，我寫規則；單位自己活，長出我算不到的東西。做4休2。</div>
+    <div class="tagline">C# + Unity 寫模擬 — 我不擺內容，我寫規則；單位自己活，長出我算不到的東西。做4休2。</div>
     <nav class="site">
       <a href="#now">現在的方向</a>
       <a href="#weekly">工作回報</a>
@@ -32,13 +32,13 @@
         <details>
           <summary>
             <span class="now-title">① 在做什麼</span>
-            <span class="now-lead">湧現模擬（Emergent Simulation），用 C# + Godot</span>
+            <span class="now-lead">湧現模擬（Emergent Simulation），用 C# + Unity</span>
           </summary>
           <div class="now-body">
             <div class="post-meta">
-              <span class="date">2026-08-22 定案</span>
+              <span class="date">2026-08-22 定案 · 08-23 換引擎</span>
               <span class="tag">C#</span>
-              <span class="tag">Godot 4.7.2</span>
+              <span class="tag">Unity</span>
               <span class="tag">模擬</span>
               <span class="tag">湧現</span>
             </div>
@@ -47,7 +47,7 @@
               <li><strong>第一個系統：蟻群覓食。</strong>300 隻蟲，三條<em>在地</em>規則（每隻蟲只看得到自己周圍 34 px），我唯一能做的事是放食物，<strong>不能命令任何一隻蟲</strong></li>
               <li><strong>結果是蟲道。</strong>沒有任何一行程式碼寫著「形成蟲道」。更意外的是<strong>改道</strong> —— 近的那堆吃完後，蟲群自己把主要路線搬到遠的那堆去，那個決策是費洛蒙衰減造成的，沒有程式碼指揮</li>
               <li><strong>量化過了：</strong>三條規則全開，35 秒運回 569 顆（32.2 顆/秒）；關掉「跟費洛蒙走」那一條剩 204 顆（7.4 顆/秒）。<strong>2.8 倍的效率差來自六行程式碼</strong>，而那六行裡沒有一個字提到「合作」或「最佳化」</li>
-              <li><strong>零安裝。</strong>Visual Studio 2026 ＋ .NET 10 ＋ Godot 4.7.2 mono，全部現成。Godot 自帶 NuGet 套件，離線也能建置</li>
+              <li><strong>2026-08-23 換引擎：Godot → Unity。</strong>方向沒變，換的理由是<strong>翻譯稅</strong> —— Godot 的母語是 GDScript，C# 是第二語言，找到的範例九成要先翻譯、而且大量是舊版本的。<strong>「一定要 C#」這個前提在 Godot 生態裡的代價，比在任何地方都高</strong></li>
             </ul>
           </div>
         </details>
