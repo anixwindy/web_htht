@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>工作回報 · 湧現模擬</title>
-  <meta name="description" content="用 C# + Unity 寫模擬：不擺內容，只寫規則，讓一堆自主單位在規則下自己活，長出算不到的東西。做4休2。">
+  <meta name="description" content="用 C++ + raylib 寫模擬：不擺內容，只寫規則，讓一堆自主單位在規則下自己活，長出算不到的東西。做4休2。">
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -12,7 +12,7 @@
 <header class="site">
   <div class="wrap">
     <a class="brand" href="index.html"><span class="prompt">$</span> world_log<span class="blink">_</span></a>
-    <div class="tagline">C# + Unity 寫模擬 — 我不擺內容，我寫規則；單位自己活，長出我算不到的東西。做4休2。</div>
+    <div class="tagline">C++ + raylib 寫模擬 — 我不擺內容，我寫規則；單位自己活，長出我算不到的東西。做4休2。</div>
     <nav class="site">
       <a href="#now">現在的方向</a>
       <a href="#weekly">工作回報</a>
@@ -32,13 +32,13 @@
         <details>
           <summary>
             <span class="now-title">① 在做什麼</span>
-            <span class="now-lead">湧現模擬（Emergent Simulation），用 C# + Unity</span>
+            <span class="now-lead">湧現模擬（Emergent Simulation），用 C++ + raylib</span>
           </summary>
           <div class="now-body">
             <div class="post-meta">
-              <span class="date">2026-08-22 定案 · 08-23 換引擎</span>
-              <span class="tag">C#</span>
-              <span class="tag">Unity</span>
+              <span class="date">2026-08-22 定案 · 08-24 換引擎</span>
+              <span class="tag">C++</span>
+              <span class="tag">raylib</span>
               <span class="tag">模擬</span>
               <span class="tag">湧現</span>
             </div>
@@ -47,7 +47,9 @@
               <li><strong>第一個系統：蟻群覓食。</strong>300 隻蟲，三條<em>在地</em>規則（每隻蟲只看得到自己周圍 34 px），我唯一能做的事是放食物，<strong>不能命令任何一隻蟲</strong></li>
               <li><strong>結果是蟲道。</strong>沒有任何一行程式碼寫著「形成蟲道」。更意外的是<strong>改道</strong> —— 近的那堆吃完後，蟲群自己把主要路線搬到遠的那堆去，那個決策是費洛蒙衰減造成的，沒有程式碼指揮</li>
               <li><strong>量化過了：</strong>三條規則全開，35 秒運回 569 顆（32.2 顆/秒）；關掉「跟費洛蒙走」那一條剩 204 顆（7.4 顆/秒）。<strong>2.8 倍的效率差來自六行程式碼</strong>，而那六行裡沒有一個字提到「合作」或「最佳化」</li>
-              <li><strong>2026-08-23 換引擎：Godot → Unity。</strong>方向沒變，換的理由是<strong>翻譯稅</strong> —— Godot 的母語是 GDScript，C# 是第二語言，找到的範例九成要先翻譯、而且大量是舊版本的。<strong>「一定要 C#」這個前提在 Godot 生態裡的代價，比在任何地方都高</strong></li>
+              <li><strong>2026-08-24 再換引擎：Unity → C++ + raylib。</strong>方向還是沒變。三個理由：<strong>(1) 語言稅</strong> —— C++ 是我最強的語言（CP 出身），Unity 是 C#（第二強）＋引擎 API 稅，兩份都要付；<strong>(2) 沒有第二個程式</strong> —— 前一天實測踩到 VS 跟 Unity 的 COM 交接爛帳，我的原話是「unity 跟 vs 協作到底是怎樣 沒有用啊」，raylib 從結構上刪掉這個坑：沒有編輯器、沒有場景檔、沒有 <code>.meta</code>、沒有匯入管線；<strong>(3) 立即模式跟湧現模擬同構</strong> —— 我的模擬每幀從狀態陣列重算全世界，這本來就是 immediate mode 的形狀。用保留模式引擎跑它，等於在一個為「一千個有身分的物件」設計的系統上跑「三十萬個沒有身分的數字」，抽象的成本付了，好處一個沒拿到</li>
+              <li><strong>環境是零安裝的：</strong>編譯器（MSVC 14.51）和 CMake（4.3.1）都是 Visual Studio 自帶的，沒有為了 raylib 裝任何新軟體。實測數字 —— 第一次設定（含從原始碼編整個 raylib）<strong>約 90 秒</strong>，改一行 <code>.cpp</code> 重建 <strong>3.3 秒</strong>，執行檔 1.9 MB。另外 raylib 可以用 emscripten 編成幾百 KB 的網頁 wasm，<strong>「做完 → 公開」的距離被壓到最短</strong>，這一項是 Unity WebGL（20–50 MB）給不了的</li>
+              <li><strong>誠實的但書：這是 15 天內第七次工具決定。</strong>前六次死亡<strong>沒有一次是工具造成的</strong> —— 競技程式設計的翻譯稅是零、工具鏈完美，它撐了兩天。共同點一直是「零間接性」。所以換工具解掉的永遠是「可能的」死因，不是已發生的。<strong>如果這次也在六天內死掉，那不會證明 raylib 不好，它會證明工具從來就不是那個變數</strong></li>
             </ul>
           </div>
         </details>
@@ -74,15 +76,25 @@
         <details>
           <summary>
             <span class="now-title">③ 下一步</span>
-            <span class="now-lead">先轉那個旋鈕，再讓世界學會反抗我</span>
+            <span class="now-lead">先轉那個旋鈕，再讓世界學會反抗我 —— 但要先躲開一個已知的死法</span>
           </summary>
           <div class="now-body">
             <ul>
+              <li><strong>★ 「一直往下鑽」其實是三種完全不同的東西，其中一種我死過。</strong>換到 C++ 之後最誘人的念頭是「往下鑽」，但那個詞是三個方向：
+
+                <ul>
+                  <li><strong>A. 實作層</strong>（spatial hash、SIMD、多執行緒）—— 間接性中等。<strong>只有被模擬逼出來才安全</strong>：「naive O(n²) 跑不動了所以我寫空間分割」可以，「我先寫好之後會用到」不行</li>
+                  <li><strong>B. 領域層</strong>（蟲加天敵 → 分工 → 基因 → 演化 → 生態自己長）—— 間接性高。<strong>這是靶心</strong>，粒子系統就贏在這裡</li>
+                  <li><strong>C. 底層層</strong>（丟掉 raylib，自己寫 OpenGL / 軟體光柵 / platform layer）—— <strong>間接性零。這就是 raytrace，我在那條線上只活了六天</strong></li>
+                </ul>
+              </li>
+              <li><strong>而 raylib 的文化引力正好指向 C。</strong>它的「no dependencies」信條、周邊的 Handmade Hero 傳統、社群裡大量「我把 raylib 換掉自己寫了 platform layer」的貼文 —— 整套價值觀都在把人往「自己寫底層」拉，<strong>而且它偽裝成「技術深度」，正好餵我的傲氣</strong>。這不是可能性，是重力：不做任何事就會被拉過去。<strong>判準記下來：每次想往下鑽，先問「這是模擬逼我的，還是我想看底層」。後者就停</strong></li>
+              <li><strong>先把蟻群用 raylib 重寫一遍，當對照實驗。</strong>規則已經懂了，成本只有幾小時，會拿到三個答案：實際冷啟動幾秒（唯一該拿來評估工具的指標，實測不是猜）、沒有 Inspector 滑桿之後調參數變好還變壞、<strong>以及有沒有一次想「我來自己寫個視窗層」—— 那是上面那條重力的測試</strong>。這次重寫<strong>不算</strong>進 <code>E10</code>，那一格已經被蟲道填了</li>
               <li><strong>轉 <code>Decay</code>（費洛蒙衰減率）。</strong>太小 → 蟲道永遠不消失，食物早就吃完了蟲還在跑舊路；太大 → 蟲道還沒成形就沒了。<strong>它就是「探索 vs 利用」的旋鈕</strong>，那個甜點要用眼睛找</li>
               <li><strong>然後加天敵。</strong>五隻蜘蛛、兩條規則。預期會看到蜘蛛<em>自己</em>沿著蟲道巡邏 —— 不是因為有人寫「沿蟲道巡邏」，而是因為蟲道上蟲最多</li>
               <li><strong>而那是一場提前小考。</strong>這條路真正的生死關在第三年：<strong>怎麼造一個我控制不住的世界</strong>。我在星海當上帝爽，是因為對手不受我控制；自己寫的模擬沒有對手，跑三次就看穿了 —— 這就是 Factorio 要有蟲族、RimWorld 要有 story teller、Dwarf Fortress 座右銘是 "Losing is Fun" 的原因</li>
               <li><strong>帶一個儀表板上路：</strong><code>E10</code> = 每做完 10 個系統，有幾個「跑出我沒預期的東西」。<strong>連續三個「無」就是紅色警報</strong>，代表我已經能預測自己的系統了</li>
-              <li><strong>誠實的但書：</strong>五次定案平均壽命 6.5 天，而且每一次都伴隨一份規劃文件。所以真正的證據不是文件寫了幾份，是筆記裡「意外」那一欄有沒有累積</li>
+              <li><strong>誠實的但書：</strong>到今天為止六次定案、七次工具決定，平均壽命約 6 天，而且<strong>每一次都伴隨一份規劃文件、一套架好的環境</strong>。所以真正的證據不是文件寫了幾份、環境架得多漂亮，<strong>是筆記裡「意外」那一欄有沒有累積</strong>。今天的產出是一個能編譯的空專案 —— 那不是進度，那是進度感</li>
             </ul>
           </div>
         </details>
